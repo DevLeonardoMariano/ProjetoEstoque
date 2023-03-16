@@ -32,7 +32,21 @@ public class Produto_Venda extends AbstractEntity<Integer> {
 		this.produto = produto;
 	}
 	
+	@ManyToOne
+	@JoinColumn(name ="idvenda")
+	private Venda venda;
+	
+	public Venda getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+	
 	//-----------------------------------------------------------------------------	
+
+	
 
 	
 
