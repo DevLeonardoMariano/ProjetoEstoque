@@ -50,12 +50,26 @@ public class Produto extends AbstractEntity<Integer> {
 			this.produto_venda = produto_venda;
 		}
 		
+		@OneToMany(mappedBy = "produto")
+		private List<Produto_Compra> produto_compra;
+		
+		public List<Produto_Compra> getProduto_compra() {
+			return produto_compra;
+		}
+
+		public void setProduto_compra(List<Produto_Compra> produto_compra) {
+			this.produto_compra = produto_compra;
+		}
+
+		
+		
 	 //-----------------------------------------------------------------------------	
 		
 	
 
 		
 
+		
 		public String getNome() {
 			return nome;
 		}

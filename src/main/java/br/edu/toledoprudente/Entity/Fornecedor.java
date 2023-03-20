@@ -1,7 +1,10 @@
 package br.edu.toledoprudente.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,8 +31,22 @@ public class Fornecedor extends AbstractEntity<Integer> {
 	
 	@Column(name="estado", length = 150, nullable = false)
 	private String estado ;
+	// -------------------------- RELACIONAMENTO --------------------------
+	@OneToMany(mappedBy = "fornecedor")
+	private List<Compra> compra;
+	
+	public List<Compra> getCompra() {
+		return compra;
+	}
+
+	public void setCompra(List<Compra> compra) {
+		this.compra = compra;
+	}
+	
 	
 	//---------------------------------------------------------------------
+
+
 
 	public String getRazao() {
 		return razao;
