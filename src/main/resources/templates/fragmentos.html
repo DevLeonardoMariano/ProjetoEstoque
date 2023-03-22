@@ -17,7 +17,7 @@
 		
 					<nav id="navbar" class="navbar order-last order-lg-0">
 						<ul>
-							<li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+							<li><a class="nav-link scrollto active" th:href="@{/categoria/listar}">Listar Categoria</a></li>
 							<li><a class="nav-link scrollto" href="#services">Services</a></li>
 							<li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
 							<li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
@@ -58,6 +58,22 @@
 			&COPY; 2023
 			
 		</div>
+		
+		<div th:fragment="script">
+			<script>
+				var url = "";
+				$(".excluir").on("click", function () {
+					// no clique do botão excluir, guardar a url para ser chamada na confirmação da janela modal
+					url = $(this).attr("data-value");
+					url = url.replace("{id}", $(this).attr("id"));
+				});
+				$("#ok_confirm").click(function () { // botão de confirmação da janela modal, chamará a controller
+					document.location.href = "http://localhost:8080" + url;
+				});
+			</script>
+		</div>
+		
+		
 		
 	</body>
 </html>
