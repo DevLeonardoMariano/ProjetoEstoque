@@ -27,15 +27,15 @@ public class Venda extends AbstractEntity<Integer> {
 	// -------------------------- RELACIONAMENTO -----------------------------------------------------
 	@ManyToOne
 	@JoinColumn(name ="idcliente")
-	private Clientes cliente;
+	private Cliente cliente;
 	
 	
-	public Clientes getCliente() {
+	public Cliente getCliente() {
 			return cliente;
 		}
 
 
-	public void setCliente(Clientes cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	

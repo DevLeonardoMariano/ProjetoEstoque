@@ -3,19 +3,23 @@ package br.edu.toledoprudente.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "clientes")
-public class Clientes extends AbstractEntity<Integer> {
+@Table(name = "cliente")
+public class Cliente extends AbstractEntity<Integer> {
 	
 	@Column(name="nome", length = 150, nullable = false)
 	private String nome;
 	
-	@Column(name="datanascimento", nullable = false, columnDefinition = "DATE")
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name="dataNascimento", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataNascimento;
 	
 	@Column(name="email", length = 150, nullable = false)

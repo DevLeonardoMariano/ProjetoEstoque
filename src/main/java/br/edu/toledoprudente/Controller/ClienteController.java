@@ -1,8 +1,5 @@
 package br.edu.toledoprudente.Controller;
 
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,30 +9,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.edu.toledoprudente.Entity.Categoria;
-import br.edu.toledoprudente.Entity.Produto;
-import br.edu.toledoprudente.Repository.CategoriaRepository;
-import br.edu.toledoprudente.Repository.ProdutoRepository;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
+import br.edu.toledoprudente.Entity.Cliente;
+import br.edu.toledoprudente.Repository.ClienteRepository;
 
 @Controller
-@RequestMapping("/produto")
-public class ProdutoController {
+@RequestMapping("/cliente")
+public class ClienteController {
 
-	@Autowired
-	private ProdutoRepository repository;
 	
 	@Autowired
-	private CategoriaRepository repositorycategoria;
+	private ClienteRepository repository;
 	
 	//tag novo utilizado na URL
 	@GetMapping("/novo")
 	public String novo(ModelMap model) {
-		model.addAttribute("produto", new Produto());
-		return "/produto/index";
+		model.addAttribute("cliente", new Cliente());
+		return "/cliente/index";
 	}
 	
 //-------------------------------------- metodo listar ------------------------------------------	
@@ -43,16 +32,16 @@ public class ProdutoController {
 	public String listar(ModelMap model) {
 		model.addAttribute("lista",repository.findAll());
 		
-		return "/produto/listar";
+		return "/cliente/listar";
 	}
 	
 //-------------------------------------- metodo pre alterar ------------------------------------------		
 	@GetMapping("/prealterar")
 	public String preAlterar(@RequestParam(name="id") int id,ModelMap model) {
 		
-		model.addAttribute("produto", repository.findById(id));
+		model.addAttribute("cliente", repository.findById(id));
 		
-		return "/produto/index";
+		return "/cliente/index";
 	}
 
 	
@@ -71,45 +60,20 @@ public class ProdutoController {
 			
 		}
 		model.addAttribute("lista", repository.findAll());
-		return "/produto/listar";
+		return "/cliente/listar";
 	}
 	
 	
 //-------------------------------------- metodo salvar ------------------------------------------	
 	@PostMapping("/salvar")
-	public String salvar(@ModelAttribute("produto") Produto pro, ModelMap model) {
+	public String salvar(@ModelAttribute("cliente") Cliente cat, ModelMap model) {
 		try {
 			
-			
-			Validator validator;
-			ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-			validator = factory.getValidator();
-			Set<ConstraintViolation<Produto>> constraintViolations =
-			validator.validate( pro );
-			String errors = "";
-
-			for (ConstraintViolation<Produto> constraintViolation : constraintViolations) {
-				errors = errors + constraintViolation.getMessage() + ". "; }
-			
-			if(errors!="")
-			{
-			//tem erros
-			model.addAttribute("produto",pro);
-			model.addAttribute("mensagem", errors);
-			model.addAttribute("retorno", false);
-			return "/produto/index";
-			}
-			else
-			{
-			}
-			
-			
-			
-			if(pro.getId()== null)
-				repository.save(pro);
+			if(cat.getId()== null)
+				repository.save(cat);
 			
 			else
-				repository.update(pro);
+				repository.update(cat);
 			model.addAttribute("mensagem", "Salvo com sucesso");
 			model.addAttribute("retorno", true);
 			
@@ -118,13 +82,7 @@ public class ProdutoController {
 			model.addAttribute("retorno", false);
 		}
 		
-		return "/produto/index";
-	}
-	/*metodo usado para retornar dados para selection*/
-	@ModelAttribute(name="listacategoria")
-	public List<Categoria> listaCategoria(){
-		
-		return repositorycategoria.findAll();
+		return "/cliente/index";
 	}
 	
 }

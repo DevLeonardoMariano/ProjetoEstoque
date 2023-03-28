@@ -6,11 +6,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Categoria")
 public class Categoria extends AbstractEntity<Integer> {
-
+		
+		@NotBlank(message = "Informe uma descrição")
+		@Size(min = 3, max = 150, message = "A descrição deve conter no minino 3 a 150 caracteres")
 		@Column(length = 150, nullable = false)
 		private String descricao;
 		

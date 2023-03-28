@@ -3,23 +3,36 @@ package br.edu.toledoprudente.Entity;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "produto")
 public class Produto extends AbstractEntity<Integer> {
 	
+	@NotBlank(message = "Informe um nome")
+	@Size(min = 3, max = 150, message = "O nome deve conter 3 a 150 caracteres")
 	@Column(name="nome", length = 150, nullable = false)
 	private String nome;
 	
-	@Column(name="valor", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
+	@NotNull(message = "Informe o redimento")
+	@PositiveOrZero(message = "Redimento deve ser maior que 0")
+	@Column(name="valor", nullable = false, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	private BigDecimal valor;
 	
+	@NotNull(message = "Informe quantidade")
 	@Column(name="estoque", length = 150, nullable = false)
 	private Integer estoque;
 	
