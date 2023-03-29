@@ -15,7 +15,7 @@ public class StringParaCategoriaConverter implements Converter<String, Categoria
 
 	@Override
 	public Categoria convert(String idTexto) {
-// TODO Auto-generated method stub
+
 		if (idTexto.isEmpty())
 
 			return null;

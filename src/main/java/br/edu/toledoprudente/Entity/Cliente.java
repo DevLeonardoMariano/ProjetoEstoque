@@ -10,33 +10,49 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "cliente")
 public class Cliente extends AbstractEntity<Integer> {
 	
+	@NotBlank(message = "Informe um nome")
+	@Size(min = 3, max = 150, message = "O nome deve conter 3 a 150 caracteres")
 	@Column(name="nome", length = 150, nullable = false)
 	private String nome;
 	
 	@DateTimeFormat(iso = ISO.DATE)
+	@NotNull(message = "Informe Data de Nascimento")
 	@Column(name="dataNascimento", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataNascimento;
 	
+	@NotBlank(message = "Informe o Email")
+	@Size(min = 3, max = 150, message = "O email deve conter 3 a 150 caracteres")
 	@Column(name="email", length = 150, nullable = false)
 	private String email;
 	
+	@NotBlank(message = "Informe o Telefone")
 	@Column(name="telefone", length = 15, nullable = false)
 	private String telefone;
 	
+	@NotBlank(message = "Informe o CPF")
 	@Column(name="cpf", length = 11, nullable = false)
 	private String cpf;
 	
+	@NotBlank(message = "Informe a Rua")
+	@Size(min = 3, max = 150, message = "A rua deve conter 3 a 150 caracteres")
 	@Column(name="rua", length = 150, nullable = false)
 	private String rua;
 	
+	@NotBlank(message = "Informe a Cidade")
+	@Size(min = 3, max = 150, message = "A cidade deve conter 3 a 150 caracteres")
 	@Column(name="cidade", length = 150, nullable = false)
 	private String cidade;
 	
+	@NotBlank(message = "Informe o Estado")
+	@Size(min = 2, max = 150, message = "O estado deve conter 3 a 150 caracteres")
 	@Column(name="estado", length = 150, nullable = false)
 	private String estado;
 

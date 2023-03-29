@@ -117,6 +117,7 @@ public class CategoriaController {
 		return "/categoria/index";
 	}
 	
+//-------------------------------------- limpar campos ------------------------------------------	
 	
 	
 }

@@ -11,27 +11,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.edu.toledoprudente.Entity.Categoria;
-import br.edu.toledoprudente.Entity.Cliente;
-import br.edu.toledoprudente.Repository.ClienteRepository;
+import br.edu.toledoprudente.Entity.Fornecedor;
+import br.edu.toledoprudente.Repository.FornecedorRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
 @Controller
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/fornecedor")
+public class FornecedorController {
 
-	
 	@Autowired
-	private ClienteRepository repository;
+	private FornecedorRepository repository;
 	
 	//tag novo utilizado na URL
 	@GetMapping("/novo")
 	public String novo(ModelMap model) {
-		model.addAttribute("cliente", new Cliente());
-		return "/cliente/index";
+		model.addAttribute("fornecedor", new Fornecedor());
+		return "/fornecedor/index";
 	}
 	
 //-------------------------------------- metodo listar ------------------------------------------	
@@ -39,16 +37,16 @@ public class ClienteController {
 	public String listar(ModelMap model) {
 		model.addAttribute("lista",repository.findAll());
 		
-		return "/cliente/listar";
+		return "/fornecedor/listar";
 	}
 	
 //-------------------------------------- metodo pre alterar ------------------------------------------		
 	@GetMapping("/prealterar")
 	public String preAlterar(@RequestParam(name="id") int id,ModelMap model) {
 		
-		model.addAttribute("cliente", repository.findById(id));
+		model.addAttribute("fornecedor", repository.findById(id));
 		
-		return "/cliente/index";
+		return "/fornecedor/index";
 	}
 
 	
@@ -67,53 +65,57 @@ public class ClienteController {
 			
 		}
 		model.addAttribute("lista", repository.findAll());
-		return "/cliente/listar";
+		return "/fornecedor/listar";
 	}
 	
 	
 //-------------------------------------- metodo salvar ------------------------------------------	
 	@PostMapping("/salvar")
-	public String salvar(@ModelAttribute("cliente") Cliente cli, ModelMap model) {
+	public String salvar(@ModelAttribute("fornecedor") Fornecedor forn, ModelMap model) {
 		try {
 			
 			
 			Validator validator;
 			ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 			validator = factory.getValidator();
-			Set<ConstraintViolation<Cliente>> constraintViolations =
-			validator.validate( cli );
+			Set<ConstraintViolation<Fornecedor>> constraintViolations =
+			validator.validate( forn );
 			String errors = "";
 
-			for (ConstraintViolation<Cliente> constraintViolation : constraintViolations) {
+			for (ConstraintViolation<Fornecedor> constraintViolation : constraintViolations) {
 				errors = errors + constraintViolation.getMessage() + ". "; }
 			
 			if(errors!="")
 			{
 			//tem erros
-			model.addAttribute("cliente",cli);
+			model.addAttribute("fornecedor",forn);
 			model.addAttribute("mensagem", errors);
 			model.addAttribute("retorno", false);
-			return "/cliente/index";
+			return "/fornecedor/index";
 			}
 			else
 			{
 			}
 			
-			
-			if(cli.getId()== null)
-				repository.save(cli);
+			if(forn.getId()== null)
+				repository.save(forn);
 			
 			else
-				repository.update(cli);
+				repository.update(forn);
 			model.addAttribute("mensagem", "Salvo com sucesso");
 			model.addAttribute("retorno", true);
 			
-		} catch (Exception e) {
+		} 
+		
+		
+		
+		catch (Exception e) {
 			model.addAttribute("mensagem", "Erro ao Salvar" + e.getMessage());
 			model.addAttribute("retorno", false);
 		}
 		
-		return "/cliente/index";
+		return "/fornecedor/index";
 	}
+	
 	
 }
