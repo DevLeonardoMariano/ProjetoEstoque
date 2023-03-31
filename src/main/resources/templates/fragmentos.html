@@ -17,7 +17,6 @@
 					<nav id="navbar" class="navbar order-last order-lg-0">
 						<ul>
 							<li><a class="nav-link scrollto active" th:href="@{/principal}">Home</a></li>
-							<li><a class="nav-link scrollto" href="#contact">Contact</a></li>
 							
 							<li class="dropdown"><a href="#"><span>Listagem</span> <i class="bi bi-chevron-down"></i></a>
 								<ul>
@@ -53,8 +52,72 @@
 		</div>
 		
 		<div th:fragment="footer">
-			&COPY; 2023
-			
+			<!-- ======= Footer ======= -->
+			<footer id="footer">
+				<div class="footer-top">
+					<div class="container">
+						<div class="row">
+		
+							<div class="col-lg-3 col-md-6">
+								<div class="footer-info">
+									<h3>Projeto Estoque</h3>
+									<p>
+										Universidade Toledo Prudente <br>
+										Presidente Prudente, SP<br><br>
+										<strong>Telefone:</strong> +55 18 99761-6158<br>
+										<strong>Email:</strong> leonardomariano02@outlook.com<br>
+									</p>
+									<div class="social-links mt-3">
+										<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+										<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+										<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+										<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+										<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+									</div>
+								</div>
+							</div>
+		
+							<div class="col-lg-2 col-md-6 footer-links">
+								<h4>Utilidade</h4>
+								<ul>
+									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/principal}">Home</a></li>
+									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/categoria/listar}">Listar Categoria</a></li>
+									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/produto/listar}">Listar Produto</a></li>
+									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/cliente/listar}">Listar Cliente</a></li>
+									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/fornecedor/listar}">Listar Fornecedor</a></li>
+								</ul>
+							</div>
+		
+							<div class="col-lg-3 col-md-6 footer-links">
+								<h4>Outros Serviçoes</h4>
+								<ul>
+									<li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+									<li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+									<li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+									<li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+									<li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+								</ul>
+							</div>
+		
+							<div class="col-lg-4 col-md-6 footer-newsletter">
+								<h4>Outro assunto</h4>
+								<form action="" method="post">
+									<input type="email" name="email"><input type="submit" value="Enviar">
+								</form>
+		
+							</div>
+		
+						</div>
+					</div>
+				</div>
+		
+				<div class="container">
+					<div class="copyright">
+						&copy; Copyright <strong><span>Projeto Estoque</span></strong>. Todo direito Reservado
+					</div>
+				</div>
+			</footer><!-- End Footer -->
+		
 		</div>
 		
 		<div th:fragment="script">

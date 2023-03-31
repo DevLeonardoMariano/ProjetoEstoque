@@ -26,8 +26,8 @@ public class Produto extends AbstractEntity<Integer> {
 	@Column(name="nome", length = 150, nullable = false)
 	private String nome;
 	
-	@NotNull(message = "Informe o redimento")
-	@PositiveOrZero(message = "Redimento deve ser maior que 0")
+	@NotNull(message = "Informe o Valor")
+	@PositiveOrZero(message = "Valor deve ser maior que 0")
 	@Column(name="valor", nullable = false, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	private BigDecimal valor;
@@ -41,6 +41,7 @@ public class Produto extends AbstractEntity<Integer> {
 		// RELACIONAMENTO COM A CLASSE CATEGORIA > UM PRODUTO PODE TER UMA CATEGORIA
 		@ManyToOne
 		@JoinColumn(name= "idcategoria")
+		@NotNull(message = "Informe categoria")
 		private Categoria categoria;
 		
 		public Categoria getCategoria() {
