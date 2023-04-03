@@ -23,17 +23,17 @@
   <!-- Template Main CSS File -->
   <link href="" rel="stylesheet" th:href="@{/css/style.css}">
   
-    <title>Cadastro Cliente</title>
+    <title>Listar Cliente</title>
   </head>
   <body>
 	  
 	  <header th:include="fragmentos::header"></header>
 	  
 	  <main class="container" style="margin: 100px;">
-			<h1>Listar Cliente</h1>
+			<h1>LISTAR CLIENTE</h1>
 			
-			<div style="margin: 20px">
-				<a class="btn btn-primary" th:href="@{/cliente/novo}">Incluir</a>
+			<div style="margin-top: 20px; margin-left: auto; margin-bottom: 30px;">
+				<a class="btn btn-info" th:href="@{/cliente/novo}">INCLUIR</a>
 			</div>
 			
 			<table class="table table-striped">
@@ -61,8 +61,8 @@
 						<td th:text="${item.email}"></td>
 						<td th:text="${item.telefone}"></td>
 						<td th:text="${item.cidade}"></td>
-						<td><a class="btn btn-info" th:href="@{/cliente/prealterar(id=${item.id})}">Alterar</a></td>
-						<td><button class="btn btn-info excluir" data-target="#myModal" type="button" th:id="${item.id}" data-value="/cliente/excluir?id={id}" data-toggle="modal" >Excluir</button></td>
+						<td><a class="btn btn-warning" th:href="@{/cliente/prealterar(id=${item.id})}">Alterar</a></td>
+						<td><button class="btn btn-danger excluir" data-target="#myModal" type="button" th:id="${item.id}" data-value="/cliente/excluir?id={id}" data-toggle="modal" >Excluir</button></td>
 					</tr>
 				</tbody>
 			</table>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  
 
-   <meta content="" name="description">
+  <meta content="" name="description">
   <meta content="" name="keywords">
   <!-- Favicons -->
   <link href="" rel="icon" th:href="@{/img/favicon.png}">
@@ -23,17 +23,17 @@
   <!-- Template Main CSS File -->
   <link href="" rel="stylesheet" th:href="@{/css/style.css}">
   
-    <title>Cadastro Produto</title>
+    <title>Listar Produto</title>
   </head>
   <body>
 	  
 	  <header th:include="fragmentos::header"></header>
 	  
 	  <main class="container" style="margin: 100px;">
-			<h1>Listar Produto</h1>
+			<h1>LISTAR PRODUTO</h1>
 			
-			<div style="margin: 20px">
-				<a class="btn btn-primary" th:href="@{/produto/novo}">Incluir</a>
+			<div style="margin-top: 20px; margin-left: auto; margin-bottom: 30px;">
+				<a class="btn btn-info" th:href="@{/produto/novo}">INCLUIR</a>
 			</div>
 			
 			<table class="table table-striped">
@@ -56,8 +56,8 @@
 						<td th:text="${item.nome}"></td>
 						<td th:text="|R$ ${{item.valor}}|"></td>
 						<td th:text="${item.categoria.descricao}"></td>
-						<td><a class="btn btn-info" th:href="@{/produto/prealterar(id=${item.id})}">Alterar</a></td>
-						<td><button class="btn btn-info excluir" data-target="#myModal" type="button" th:id="${item.id}" data-value="/produto/excluir?id={id}" data-toggle="modal" >Excluir</button></td>
+						<td><a class="btn btn-warning" th:href="@{/produto/prealterar(id=${item.id})}">Alterar</a></td>
+						<td><button class="btn btn-danger excluir" data-target="#myModal" type="button" th:id="${item.id}" data-value="/produto/excluir?id={id}" data-toggle="modal" >Excluir</button></td>
 					</tr>
 				</tbody>
 			</table>
