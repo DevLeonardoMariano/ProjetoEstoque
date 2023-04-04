@@ -36,8 +36,14 @@ public class Produto extends AbstractEntity<Integer> {
 	@Column(name="estoque", length = 150, nullable = false)
 	private Integer estoque;
 	
+	
+	@Column(name= "imagem", length = 300)
+	private String imagem;
+	
 	//-----------------------------------------------------------------------------	
 	
+
+
 		// RELACIONAMENTO COM A CLASSE CATEGORIA > UM PRODUTO PODE TER UMA CATEGORIA
 		@ManyToOne
 		@JoinColumn(name= "idcategoria")
@@ -81,7 +87,13 @@ public class Produto extends AbstractEntity<Integer> {
 		
 	
 
-		
+		public String getImagem() {
+			return imagem;
+		}
+
+		public void setImagem(String imagem) {
+			this.imagem = imagem;
+		}
 
 		
 		public String getNome() {

@@ -56,11 +56,11 @@ public class FornecedorController {
 		
 		try {
 			repository.delete(id);
-			model.addAttribute("mensagem", "Exlusão efetuada");
+			model.addAttribute("mensagem", "Exclusão efetuada");
 			model.addAttribute("retorno", true);
 		}
 		catch (Exception e){
-			model.addAttribute("mensagem", "Exlusão não pode ser efetuada");
+			model.addAttribute("mensagem", "Exclusão não pode ser efetuada");
 			model.addAttribute("retorno", false);
 			
 		}

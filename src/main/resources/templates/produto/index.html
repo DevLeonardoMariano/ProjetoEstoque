@@ -30,7 +30,7 @@
 	  <header th:include="fragmentos::header"></header>
 	  
 	  <main class="container">
-			<form class="formulario" method="post" th:action="@{/produto/salvar}" th:object="${produto}">
+			<form class="formulario" method="post" enctype="multipart/form-data" th:action="@{/produto/salvar}" th:object="${produto}">
 				<h1>Produto</h1>
 				<div class="form-group mb-2">
 					<label for="exampleInputEmail1">Codigo</label>
@@ -56,7 +56,10 @@
 						<option th:each="item:${listacategoria}" th:value="${item.id}" th:text="${item.descricao}"></option>
 					</select>
 				</div>
-
+				<div class="form-group mb-2">
+					<label>Imagem</label>
+					<input type="file" id="file" name="file" >
+				</div>
 				<button type="submit" class="btn btn-success" style="margin-top: 25px;">SALVAR</button>
 			</form>
 			

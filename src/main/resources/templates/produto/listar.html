@@ -44,6 +44,7 @@
 						<th scope="col">Nome</th>
 						<th scope="col">Valor</th>
 						<th scope="col">Categoria</th>
+						<th scope="col">Imagem</th>
 						<th scope="col">Alterar</th>
 						<th scope="col">Excluir</th>
 						
@@ -56,6 +57,7 @@
 						<td th:text="${item.nome}"></td>
 						<td th:text="|R$ ${{item.valor}}|"></td>
 						<td th:text="${item.categoria.descricao}"></td>
+						<td ><img width="100px" height="100px" style="object-fit:contain" class="img-fluid" th:src="@{'/produto/getimagem/'+ *{item.imagem}}"/></td>
 						<td><a class="btn btn-warning" th:href="@{/produto/prealterar(id=${item.id})}">Alterar</a></td>
 						<td><button class="btn btn-danger excluir" data-target="#myModal" type="button" th:id="${item.id}" data-value="/produto/excluir?id={id}" data-toggle="modal" >Excluir</button></td>
 					</tr>
