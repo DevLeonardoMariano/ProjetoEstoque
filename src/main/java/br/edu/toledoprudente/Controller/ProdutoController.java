@@ -43,6 +43,8 @@ public class ProdutoController {
 	@Autowired
 	private CategoriaRepository repositorycategoria;
 
+
+
 	// tag novo utilizado na URL
 	@GetMapping("/novo")
 	public String novo(ModelMap model) {
@@ -61,13 +63,13 @@ public class ProdutoController {
 //-------------------------------------- metodo pre alterar ------------------------------------------		
 	@GetMapping("/prealterar")
 	public String preAlterar(@RequestParam(name = "id") int id, ModelMap model) {
-
+		
 		model.addAttribute("produto", repository.findById(id));
 		
 
 		return "/produto/index";
 	}
-
+	
 //-------------------------------------- metodo excluir ------------------------------------------		
 	@GetMapping("/excluir")
 	public String Excluir(@RequestParam int id, ModelMap model) {

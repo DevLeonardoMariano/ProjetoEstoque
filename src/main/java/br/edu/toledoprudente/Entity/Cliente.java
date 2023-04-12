@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -55,9 +58,15 @@ public class Cliente extends AbstractEntity<Integer> {
 	@Size(min = 2, max = 150, message = "O estado deve conter 3 a 150 caracteres")
 	@Column(name="estado", length = 150, nullable = false)
 	private String estado;
-
+	
+	
 // -------------------------- RELACIONAMENTO -----------------------------------------------------	
 
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="idUsuario")
+	private Users usuario;
+	
 	@OneToMany(mappedBy = "cliente")
 	private List<Venda> venda;
 	
@@ -70,8 +79,15 @@ public class Cliente extends AbstractEntity<Integer> {
 	}
 // -------------------------------------------------------------------------------
 
+	public Users getUsuario() {
+		return usuario;
+	}
 
+	public void setUsuario(Users usuario) {
+		this.usuario = usuario;
+	}
 
+	
 	public String getNome() {
 		return nome;
 	}

@@ -1,5 +1,8 @@
 package br.edu.toledoprudente.Controller;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.edu.toledoprudente.Entity.AppAuthority;
 import br.edu.toledoprudente.Entity.Categoria;
 import br.edu.toledoprudente.Entity.Cliente;
+import br.edu.toledoprudente.Entity.Users;
 import br.edu.toledoprudente.Repository.ClienteRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -30,7 +35,9 @@ public class ClienteController {
 	//tag novo utilizado na URL
 	@GetMapping("/novo")
 	public String novo(ModelMap model) {
-		model.addAttribute("cliente", new Cliente());
+		Cliente cli = new Cliente();
+		cli.setUsuario(new Users());
+		model.addAttribute("cliente", cli);
 		return "/cliente/index";
 	}
 	
@@ -95,8 +102,23 @@ public class ClienteController {
 			model.addAttribute("retorno", false);
 			return "/cliente/index";
 			}
-			else
-			{
+			else {
+				
+				Users usu = cli.getUsuario();
+				usu.setPassword(new BCryptPasswordEncoder().encode(usu.getPassword()));
+				usu.setEnabled(true);
+				usu.setAdmin(false);
+				
+				Set<AppAuthority> appAuthorities = new HashSet<AppAuthority>();
+				AppAuthority app = new AppAuthority();
+				if (usu.isAdmin())
+					app.setAuthority("ADM");
+				else
+					app.setAuthority("USER");
+				app.setUsername(usu.getUsername());
+				appAuthorities.add(app);
+				usu.setAppAuthorities(appAuthorities);
+
 			}
 			
 			
