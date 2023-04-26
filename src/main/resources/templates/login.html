@@ -2,54 +2,54 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Projeto Estoque</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-  <!-- Favicons -->
-  <link href="" rel="icon" th:href="@{/img/favicon.png}">
-  <link href="" rel="apple-touch-icon" th:href="@{/img/apple-touch-icon.png}">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  <!-- Vendor CSS Files -->
-  <link href="" rel="stylesheet" th:href="@{/vendor/aos/aos.css}">
-  <link href="" rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
-  <link href="" rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}">
-  <link href="" rel="stylesheet" th:href="@{/vendor/boxicons/css/boxicons.min.css}">
-  <link href="" rel="stylesheet" th:href="@{/vendor/glightbox/css/glightbox.min.css}">
-  <link href="" rel="stylesheet" th:href="@{/vendor/swiper/swiper-bundle.min.css}">
-  <!-- Template Main CSS File -->
-  <link href="" rel="stylesheet" th:href="@{/css/style.css}">
+	<title>Projeto Estoque</title>
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	<!-- Favicons -->
+	<link href="" rel="icon" th:href="@{/img/favicon.png}">
+	<link href="" rel="apple-touch-icon" th:href="@{/img/apple-touch-icon.png}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
+	<!-- Vendor CSS Files -->
+	<link href="" rel="stylesheet" th:href="@{/vendor/aos/aos.css}">
+	<link href="" rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+	<link href="" rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}">
+	<link href="" rel="stylesheet" th:href="@{/vendor/boxicons/css/boxicons.min.css}">
+	<link href="" rel="stylesheet" th:href="@{/vendor/glightbox/css/glightbox.min.css}">
+	<link href="" rel="stylesheet" th:href="@{/vendor/swiper/swiper-bundle.min.css}">
+	<!-- Template Main CSS File -->
+	<link href="" rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 
 <body>
-	
+
 	<form th:action="@{/login}" method="post">
-		<p th:if="${mensagem != null}" th:text="${mensagem}" />
-		<p>
+			<p th:if="${mensagem != null}" th:text="${mensagem}" />
 			<label for="username">Usuario</label>
 			<input class="form-control" type="text" id="username" name="username" />
-		</p>
-		<p>
 			<label for="password">Senha</label>
 			<input class="form-control" type="password" id="password" name="password" />
-		</p>
-		<button type="submit" class="btn btn-primary">Log in</button>
-	</form>
-	
-  <!-- Vendor JS Files -->
-  <script src="" th:src="@{/vendor/aos/aos.js}"></script>
-  <script src="" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-  <script src="" th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
-  <script src="" th:src="@{/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-  <script src="" th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
-  <script src="" th:src="@{/vendor/php-email-form/validate.js}"></script>
 
-  <!-- Template Main JS File -->
-  <script src="" th:src="@{/js/main.js}"></script>
+			<button type="submit" class="btn btn-primary">Entrar</button>
+	</form>
+	<!-- Vendor JS Files -->
+	<script src="" th:src="@{/vendor/aos/aos.js}"></script>
+	<script src="" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script src="" th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
+	<script src="" th:src="@{/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+	<script src="" th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
+	<script src="" th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+	<!-- Template Main JS File -->
+	<script src="" th:src="@{/js/main.js}"></script>
 
 </body>
 

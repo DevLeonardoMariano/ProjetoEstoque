@@ -1,17 +1,23 @@
 package br.edu.toledoprudente.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.edu.toledoprudente.Repository.UsersRepository;
+
 @Controller
 @RequestMapping("/")
 public class PrincipalController {
 
+	@Autowired
+	UsersRepository Repository;
+	
 	@GetMapping("/")
-	public String principal() {
-
+	public String principal(ModelMap model) {
+		model.addAttribute("nomeusuario", Repository.getUsuarioLogado().getNome());
 		return "principal";
 	}
 

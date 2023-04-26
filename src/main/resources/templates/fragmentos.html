@@ -1,143 +1,158 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	
-	<head>
-		
-	</head>
-	<body>
-		
-		<div th:fragment="header">
-			<!-- ======= Header ======= -->
-			<header id="header" class="fixed-top d-flex align-items-center">
-				<div class="container d-flex align-items-center">
-		
-					<div class="logo me-auto">
-						<h1><a href="#">Projeto Estoque</a></h1>
-					</div>
-		
-					<nav id="navbar" class="navbar order-last order-lg-0">
-						<ul>
-							<li><a class="nav-link scrollto active" th:href="@{/principal}">Home</a></li>
-							
-							<li class="dropdown"><a href="#"><span>Listagem</span> <i class="bi bi-chevron-down"></i></a>
-								<ul>
-									<li><a class="nav-link scrollto" th:href="@{/categoria/listar}">Listar Categoria</a></li>
-									<li><a class="nav-link scrollto" th:href="@{/produto/listar}">Listar Produto</a></li>
-									<li><a class="nav-link scrollto" th:href="@{/cliente/listar}">Listar Cliente</a></li>
-									<li><a class="nav-link scrollto" th:href="@{/fornecedor/listar}">Listar Fornecedor</a></li>
-								</ul>
-							</li>
-							
-							
-							<li class="dropdown"><a href="#"><span>Cadastrar</span> <i class="bi bi-chevron-down"></i></a>
-								<ul>
-									<li><a class="nav-link scrollto" th:href="@{/categoria/novo}">Categoria</a></li>
-									<li><a class="nav-link scrollto" th:href="@{/produto/novo}">Produto</a></li>
-									<li><a class="nav-link scrollto" th:href="@{/cliente/novo}">Cliente</a></li>
-									<li><a class="nav-link scrollto" th:href="@{/fornecedor/novo}">Fornecedor</a></li>
-								</ul>
-							</li>
-							
-							<li><a class="nav-link scrollto active" th:href="@{/logout}">Sair</a></li>
-						</ul>
-						<i class="bi bi-list mobile-nav-toggle"></i>
-					</nav><!-- .navbar -->
-		
-					<div class="header-social-links d-flex align-items-center">
-						<a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-						<a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-						<a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-						<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-					</div>
-		
+
+<head>
+
+</head>
+
+<body>
+
+	<div th:fragment="header">
+		<!-- ======= Header ======= -->
+		<header id="header" class="fixed-top d-flex align-items-center">
+			<div class="container d-flex align-items-center">
+
+				<div class="logo me-auto">
+					<h1><a href="#">Projeto Estoque</a></h1>
 				</div>
-			</header><!-- End Header -->
-		</div>
-		
-		<div th:fragment="footer">
-			<!-- ======= Footer ======= -->
-			<footer id="footer">
-				<div class="footer-top">
-					<div class="container">
-						<div class="row">
-		
-							<div class="col-lg-3 col-md-6">
-								<div class="footer-info">
-									<h3>Projeto Estoque</h3>
-									<p>
-										Universidade Toledo Prudente <br>
-										Presidente Prudente, SP<br><br>
-										<strong>Telefone:</strong> +55 18 99761-6158<br>
-										<strong>Email:</strong> leonardomariano02@outlook.com<br>
-									</p>
-									<div class="social-links mt-3">
-										<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-										<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-										<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-										<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-										<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-									</div>
+
+
+
+				<nav id="navbar" class="navbar order-last order-lg-0">
+					<ul>
+						<li><a class="nav-link scrollto active" th:href="@{/principal}">Home</a></li>
+
+						<li class="dropdown"><a href="#"><span>Listagem</span> <i class="bi bi-chevron-down"></i></a>
+							<ul>
+								<li><a class="nav-link scrollto" th:href="@{/categoria/listar}">Listar Categoria</a>
+								</li>
+								<li><a class="nav-link scrollto" th:href="@{/produto/listar}">Listar Produto</a></li>
+								<li><a class="nav-link scrollto" th:href="@{/cliente/listar}">Listar Cliente</a></li>
+								<li><a class="nav-link scrollto" th:href="@{/fornecedor/listar}">Listar Fornecedor</a>
+								</li>
+							</ul>
+						</li>
+
+
+						<li class="dropdown"><a href="#"><span>Cadastrar</span> <i class="bi bi-chevron-down"></i></a>
+							<ul>
+								<li><a class="nav-link scrollto" th:href="@{/categoria/novo}">Categoria</a></li>
+								<li><a class="nav-link scrollto" th:href="@{/produto/novo}">Produto</a></li>
+								<li><a class="nav-link scrollto" th:href="@{/cliente/novo}">Cliente</a></li>
+								<li><a class="nav-link scrollto" th:href="@{/fornecedor/novo}">Fornecedor</a></li>
+							</ul>
+						</li>
+
+						<li><a class="nav-link scrollto active" th:href="@{/logout}">Sair</a></li>
+					</ul>
+
+					<i class="bi bi-list mobile-nav-toggle"></i>
+				</nav><!-- .navbar -->
+
+				<div class="header-social-links d-flex align-items-center">
+					<a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+					<a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+					<a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+					<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+				</div>
+				<div th:if="${nomeusuario} !=null" class="row ml-3">
+					<span th:text="${nomeusuario}"></span>
+				</div>
+			</div>
+		</header><!-- End Header -->
+	</div>
+
+	<div th:fragment="footer">
+		<!-- ======= Footer ======= -->
+		<footer id="footer">
+			<div class="footer-top">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-lg-3 col-md-6">
+							<div class="footer-info">
+								<h3>Projeto Estoque</h3>
+								<p>
+									Universidade Toledo Prudente <br>
+									Presidente Prudente, SP<br><br>
+									<strong>Telefone:</strong> +55 18 99761-6158<br>
+									<strong>Email:</strong> leonardomariano02@outlook.com<br>
+								</p>
+								<div class="social-links mt-3">
+									<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+									<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+									<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+									<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+									<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
 								</div>
 							</div>
-		
-							<div class="col-lg-2 col-md-6 footer-links">
-								<h4>Utilidade</h4>
-								<ul>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/principal}">Home</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/categoria/listar}">Listar Categoria</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/produto/listar}">Listar Produto</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/cliente/listar}">Listar Cliente</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/fornecedor/listar}">Listar Fornecedor</a></li>
-								</ul>
-							</div>
-		
-							<div class="col-lg-3 col-md-6 footer-links">
-								<h4>Cadastro</h4>
-								<ul>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/categoria/novo}">Categoria</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/produto/novo}">Produto</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/cliente/novo}">Cliente</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a th:href="@{/fornecedor/novo}">Fornecedor</a></li>
-									
-								</ul>
-							</div>
-		
-							<div class="col-lg-4 col-md-6 footer-newsletter">
-								<h4>Duvidas ?</h4>
-								<p><strong>Nos encaminhe sua duvida</strong></p>
-								<form action="" method="post">
-									<input type="email" name="email"><input type="submit" value="Enviar">
-								</form>
-		
-							</div>
-		
 						</div>
+
+						<div class="col-lg-2 col-md-6 footer-links">
+							<h4>Utilidade</h4>
+							<ul>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/principal}">Home</a></li>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/categoria/listar}">Listar
+										Categoria</a></li>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/produto/listar}">Listar
+										Produto</a></li>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/cliente/listar}">Listar
+										Cliente</a></li>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/fornecedor/listar}">Listar
+										Fornecedor</a></li>
+							</ul>
+						</div>
+
+						<div class="col-lg-3 col-md-6 footer-links">
+							<h4>Cadastro</h4>
+							<ul>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/categoria/novo}">Categoria</a>
+								</li>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/produto/novo}">Produto</a></li>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/cliente/novo}">Cliente</a></li>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/fornecedor/novo}">Fornecedor</a>
+								</li>
+
+							</ul>
+						</div>
+
+						<div class="col-lg-4 col-md-6 footer-newsletter">
+							<h4>Duvidas ?</h4>
+							<p><strong>Nos encaminhe sua duvida</strong></p>
+							<form action="" method="post">
+								<input type="email" name="email"><input type="submit" value="Enviar">
+							</form>
+
+						</div>
+
 					</div>
 				</div>
-		
-				<div class="container">
-					<div class="copyright">
-						&copy; Copyright <strong><span>Projeto Estoque</span></strong>. Todo direito Reservado
-					</div>
+			</div>
+
+			<div class="container">
+				<div class="copyright">
+					&copy; Copyright <strong><span>Projeto Estoque</span></strong>. Todo direito Reservado
 				</div>
-			</footer><!-- End Footer -->
-		
-		</div>
-		
-		<div th:fragment="script">
-			<script>
-				var url = "";
-				$(".excluir").on("click", function () {
-					// no clique do botão excluir, guardar a url para ser chamada na confirmação da janela modal
-					url = $(this).attr("data-value");
-					url = url.replace("{id}", $(this).attr("id"));
-				});
-				$("#ok_confirm").click(function () { // botão de confirmação da janela modal, chamará a controller
-					document.location.href = "http://localhost:8080" + url;
-				});
-			</script>
-		</div>
-		
-		
-		
-	</body>
+			</div>
+		</footer><!-- End Footer -->
+
+	</div>
+
+	<div th:fragment="script">
+		<script>
+			var url = "";
+			$(".excluir").on("click", function () {
+				// no clique do botão excluir, guardar a url para ser chamada na confirmação da janela modal
+				url = $(this).attr("data-value");
+				url = url.replace("{id}", $(this).attr("id"));
+			});
+			$("#ok_confirm").click(function () { // botão de confirmação da janela modal, chamará a controller
+				document.location.href = "http://localhost:8080" + url;
+			});
+		</script>
+	</div>
+
+
+
+</body>
+
 </html>

@@ -28,7 +28,7 @@
 	<!-- Template Main CSS File -->
 	<link href="" rel="stylesheet" th:href="@{/css/style.css}">
 
-	<title>Cadastro Fornecedor</title>
+	<title>Cadastro Venda</title>
 </head>
 
 <body>
@@ -36,56 +36,47 @@
 	<header th:include="fragmentos::header"></header>
 
 	<main class="container">
-		<form class="formulario" method="post" th:action="@{/fornecedor/salvar}" th:object="${fornecedor}">
-			<h1>Fornecedor</h1>
+		<!--
+		<form class="formulario" method="post" enctype="multipart/form-data" th:action="@{/produto/salvar}"
+			th:object="${produto}">
+			<h1>Produto</h1>
 			<div class="form-row">
-
 				<div class="form-group mb-2 col-md-12">
 					<label for="exampleInputEmail1">Codigo</label>
 					<input th:field="*{id}" type="text" readonly class="form-control" id="exampleInputEmail1"
 						aria-describedby="emailHelp" placeholder="">
 				</div>
-				<div class="form-group mb-2 col-md-7">
-					<label for="exampleInputPassword1">Razão</label>
-					<input th:field="*{razao}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Razão">
-				</div>
-				<div class="form-group mb-2 col-md-5">
-					<label for="exampleInputPassword1">CNPJ</label>
-					<input th:field="*{cnpj}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="CNPJ">
-				</div>
 				<div class="form-group mb-2 col-md-8">
-					<label for="exampleInputPassword1">Email</label>
-					<input th:field="*{email}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Email" aria-describedby="emailHelp">
+					<label for="exampleInputPassword1">Nome do Produto</label>
+					<input th:field="*{nome}" type="text" class="form-control" id="exampleInputPassword1"
+						placeholder="Nome do Produto">
 				</div>
 				<div class="form-group mb-2 col-md-4">
-					<label for="exampleInputPassword1">Telefone</label>
-					<input th:field="*{telefone}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Telefone">
+					<label for="exampleInputPassword1">Quantidade no estoque</label>
+					<input th:field="*{estoque}" type="text" class="form-control" id="exampleInputPassword1"
+						placeholder="Quantidade no estoque">
+				</div>
+				<div class="form-group mb-2 col-md-8">
+					<label for="exampleInputPassword1">Categoria</label>
+					<select class="form-control" th:field="*{categoria}">
+						<option value=""> Selecione a categoria...</option>
+						<option th:each="item:${listacategoria}" th:value="${item.id}" th:text="${item.descricao}">
+						</option>
+					</select>
+				</div>
+				<div class="form-group mb-2 col-md-4">
+					<label for="exampleInputPassword1">Valor</label>
+					<input th:field="*{valor}" type="text" class="form-control" id="exampleInputPassword1"
+						placeholder="Valor">
 				</div>
 				<div class="form-group mb-2 col-md-12">
-					<label for="exampleInputPassword1">Rua</label>
-					<input th:field="*{rua}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Rua">
+					<label>Imagem</label>
+					<input type="file" id="file" name="file">
 				</div>
-				<div class="form-group mb-2 col-md-6">
-					<label for="exampleInputPassword1">Cidade</label>
-					<input th:field="*{cidade}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Cidade">
-				</div>
-				<div class="form-group mb-2 col-md-6">
-					<label for="exampleInputPassword1">Estado</label>
-					<input th:field="*{estado}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Estado">
-				</div>
-
 			</div>
-
 			<button type="submit" class="btn btn-success" style="margin-top: 25px;">SALVAR</button>
 		</form>
-
+	-->
 		<div th:if="${retorno} !=null" class="row">
 			<span th:if="${retorno}" class="alert alert-success" th:text="${mensagem}"></span>
 			<span th:if="!${retorno}" class="alert alert-danger" th:text="${mensagem}"></span>
@@ -107,6 +98,54 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
+
+<script>
+
+	$(document).ready(function () {
+		getCliente("Leonardo");
+		salvarCliente();
+	});
+
+	function getCliente(nome) {
+
+		$.get("http://localhost:8080/venda/getCliente/" + nome, function (resultado) {
+
+			console.log(resultado);
+
+		});
+	}
+
+	function salvarCliente() {
+
+		var model = {
+			id: "null",
+			nome: "Felipe Mariano",
+			dataNascimento: "2000-01-01",
+			email: "testes34@teste.com",
+			telefone: "11996665432",
+			cpf: "99988877755",
+			rua: "teste4",
+			cidade: "teste56",
+			estado: "TS"
+			
+		};
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:8080/venda/salvarCliente",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(model),
+			dataType: "json",
+			success: function (jsonResult) {
+				console.log(jsonResult);
+			},
+			failure: function (response) {
+				alert("Erro ao carregar os dados: " + response);
+			}
+		});
+
+	}
+
+</script>
 </body>
 
 </html>

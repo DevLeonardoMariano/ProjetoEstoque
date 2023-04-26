@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.edu.toledoprudente.Entity.AppAuthority;
-import br.edu.toledoprudente.Entity.Categoria;
 import br.edu.toledoprudente.Entity.Cliente;
 import br.edu.toledoprudente.Entity.Users;
 import br.edu.toledoprudente.Repository.ClienteRepository;
@@ -105,7 +104,8 @@ public class ClienteController {
 			else {
 				
 				Users usu = cli.getUsuario();
-				usu.setPassword(new BCryptPasswordEncoder().encode(usu.getPassword()));
+				String senha = "{bcrypt}" + new BCryptPasswordEncoder().encode(usu.getPassword());
+				usu.setPassword(senha);
 				usu.setEnabled(true);
 				usu.setAdmin(false);
 				
