@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -64,12 +64,12 @@ public class Cliente extends AbstractEntity<Integer> {
 	
 // -------------------------- RELACIONAMENTO -----------------------------------------------------	
 
-	@JsonIgnore
+	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="idUsuario")
 	private Users usuario;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "cliente")
 	private List<Venda> venda;
 	

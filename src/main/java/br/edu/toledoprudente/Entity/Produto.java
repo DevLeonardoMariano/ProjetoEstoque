@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -45,6 +47,8 @@ public class Produto extends AbstractEntity<Integer> {
 
 
 		// RELACIONAMENTO COM A CLASSE CATEGORIA > UM PRODUTO PODE TER UMA CATEGORIA
+		//----------------------------------------------------------------------------------
+		@JsonIgnore
 		@ManyToOne
 		@JoinColumn(name= "idcategoria")
 		@NotNull(message = "Informe categoria")
@@ -58,7 +62,8 @@ public class Produto extends AbstractEntity<Integer> {
 			this.categoria = categoria;
 			
 		}
-		
+		//----------------------------------------------------------------------------------
+		@JsonIgnore
 		@OneToMany(mappedBy = "produto")
 		private List<Produto_Venda> produto_venda;
 		
@@ -69,7 +74,8 @@ public class Produto extends AbstractEntity<Integer> {
 		public void setProduto_venda(List<Produto_Venda> produto_venda) {
 			this.produto_venda = produto_venda;
 		}
-		
+		//----------------------------------------------------------------------------------
+		@JsonIgnore
 		@OneToMany(mappedBy = "produto")
 		private List<Produto_Compra> produto_compra;
 		

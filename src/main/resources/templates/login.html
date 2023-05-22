@@ -27,19 +27,88 @@
 	<!-- Template Main CSS File -->
 	<link href="" rel="stylesheet" th:href="@{/css/style.css}">
 
+	<style>
+		body {
+			background-color: #adb5bd;
+		}
+
+		.container {
+			display: flex;
+			justify-content: center;
+			margin-top: 5rem;
+
+		}
+
+		input {
+			width: 80% !important;
+		}
+
+		form {
+			border: solid 1px #adb5bd;
+			border-radius: 10px;
+			background-color: #e9ecef;
+			
+		}
+
+		.form-row {
+			position: relative !important;
+			left: 2.5rem !important;
+			top: 3rem !important;
+		}
+
+		button {
+			width: 78% !important;
+		}
+
+		.btnLogin {
+			margin-top: 3rem;
+			display: flex;
+			justify-content: center;
+		}
+
+		.btn-primary {
+			background-color: #0d6efd;
+			border-color: #0d6efd;
+		}
+
+		.btn-primary:hover {
+			background-color: rgb(2, 81, 200);
+			border-color: rgb(2, 81, 200);
+			transition: 0.6s;
+		}
+
+		p {
+			font-size: 1.2rem;
+			font-weight: bold;
+			text-align: center;
+			color: red;
+		}
+	</style>
+
 </head>
 
 <body>
 
-	<form th:action="@{/login}" method="post">
+	<div class="container">
+		<form th:action="@{/login}" method="post">
+			<div class="form-row">
+				<div class="col-md-12 mb-3">
+					
+					<label class="mt-3" for="username">E-mail</label>
+					<input class="form-control w-40" type="text" id="username" name="username" />
+				</div>
+				<div class="col-md-12 mb-3">
+					<label for="password">Senha</label>
+					<input class="form-control" type="password" id="password" name="password" />
+				</div>
+			</div>
+			<div class="btnLogin">
+				<button type="submit" class="btn btn-primary mt-5 mb-4">ENTRAR</button>
+			</div>
 			<p th:if="${mensagem != null}" th:text="${mensagem}" />
-			<label for="username">Usuario</label>
-			<input class="form-control" type="text" id="username" name="username" />
-			<label for="password">Senha</label>
-			<input class="form-control" type="password" id="password" name="password" />
-
-			<button type="submit" class="btn btn-primary">Entrar</button>
-	</form>
+			<p>
+		</form>
+	</div>
 	<!-- Vendor JS Files -->
 	<script src="" th:src="@{/vendor/aos/aos.js}"></script>
 	<script src="" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

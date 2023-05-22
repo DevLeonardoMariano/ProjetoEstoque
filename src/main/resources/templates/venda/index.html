@@ -34,52 +34,88 @@
 <body>
 
 	<header th:include="fragmentos::header"></header>
-
 	<main class="container">
-		<!--
 		<form class="formulario" method="post" enctype="multipart/form-data" th:action="@{/produto/salvar}"
 			th:object="${produto}">
-			<h1>Produto</h1>
-			<div class="form-row">
-				<div class="form-group mb-2 col-md-12">
-					<label for="exampleInputEmail1">Codigo</label>
-					<input th:field="*{id}" type="text" readonly class="form-control" id="exampleInputEmail1"
-						aria-describedby="emailHelp" placeholder="">
-				</div>
-				<div class="form-group mb-2 col-md-8">
-					<label for="exampleInputPassword1">Nome do Produto</label>
-					<input th:field="*{nome}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Nome do Produto">
-				</div>
-				<div class="form-group mb-2 col-md-4">
-					<label for="exampleInputPassword1">Quantidade no estoque</label>
-					<input th:field="*{estoque}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Quantidade no estoque">
-				</div>
-				<div class="form-group mb-2 col-md-8">
-					<label for="exampleInputPassword1">Categoria</label>
-					<select class="form-control" th:field="*{categoria}">
-						<option value=""> Selecione a categoria...</option>
-						<option th:each="item:${listacategoria}" th:value="${item.id}" th:text="${item.descricao}">
-						</option>
-					</select>
-				</div>
-				<div class="form-group mb-2 col-md-4">
-					<label for="exampleInputPassword1">Valor</label>
-					<input th:field="*{valor}" type="text" class="form-control" id="exampleInputPassword1"
-						placeholder="Valor">
-				</div>
-				<div class="form-group mb-2 col-md-12">
-					<label>Imagem</label>
-					<input type="file" id="file" name="file">
-				</div>
+			<h1>Venda</h1>
+
+			<div class="form-group mb-2 col-md-8">
+				<label for="exampleInputPassword1">Cliente</label>
+				<select class="form-control" id="idcliente">
+					<option value=""> Selecione um Cliente...</option>
+					<option th:each="item:${listacliente}" th:value="${item.id}" th:text="${item.nome}">
+					</option>
+				</select>
 			</div>
-			<button type="submit" class="btn btn-success" style="margin-top: 25px;">SALVAR</button>
+			<div class="form-group mb-2 col-md-8">
+				<label for="exampleInputPassword1">Produto</label>
+				<select class="form-control" id="idproduto">
+					<option value=""> Selecione um Produto...</option>
+					<option th:each="item:${listaproduto}" th:value="${item.id}" th:text="${item.nome}">
+					</option>
+				</select>
+			</div>
 		</form>
-	-->
-		<div th:if="${retorno} !=null" class="row">
-			<span th:if="${retorno}" class="alert alert-success" th:text="${mensagem}"></span>
-			<span th:if="!${retorno}" class="alert alert-danger" th:text="${mensagem}"></span>
+
+
+		<div class="row" style="margin-top: 20px; margin-left: 30px; margin-bottom: 30px;">
+			<div class="col-md-4">
+				<input type="number" id="txtquantidade" class="form-control" />
+			</div>
+			<div class="col-md-4">
+				<a id="btnincluirproduto" class="btn btn-info" href="#">INCLUIR PRODUTO</a>
+			</div>
+
+		</div>
+
+		<table class="table table-striped" style="margin-bottom: 30px;">
+			<thead>
+				<tr>
+					<th scope="col">Cliente</th>
+					<th scope="col">Cod Produto</th>
+					<th scope="col">Produto</th>
+					<th scope="col">Quantidade</th>
+					<th scope="col">Valor unitario</th>
+					<th scope="col">Total</th>
+					<th scope="col">Excluir</th>
+				</tr>
+			</thead>
+			<tbody id="dadostabela">
+
+			</tbody>
+
+			<table style="display: none;">
+				<tr id="linhamodelo">
+					<td class="cliente"></td>
+					<td class="codigo"></td>
+					<td class="produto"></td>
+					<td class="quantidade">
+						<select class="quantidadeproduto">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+					</td>
+					<td class="valorunitario"></td>
+					<td class="total"></td>
+					<td class="excluir">
+						<a href="#" class="btnexcluir">Excluir</a>
+					</td>
+				</tr>
+			</table>
+
+		</table>
+		<h3>Total Geral</h3>
+		<span id="totalgeral"></span>
+		<div style="margin-top: 10px; margin-bottom: 10px;">
+			<button class="btn btn-info" id="salvarVenda">SALVAR</button>
 		</div>
 	</main>
 
@@ -102,48 +138,124 @@
 <script>
 
 	$(document).ready(function () {
-		getCliente("Leonardo");
-		salvarCliente();
+
+		$("#btnincluirproduto").click(function () {
+			incluirProduto();
+		});
+
+
 	});
 
-	function getCliente(nome) {
 
-		$.get("http://localhost:8080/venda/getCliente/" + nome, function (resultado) {
+	function incluirProduto() {
 
-			console.log(resultado);
+
+		var linha = $("#linhamodelo").clone();
+		linha.attr("id", "");
+
+		$(linha).find(".cliente").text($("#idcliente option:selected").text());
+
+		$(linha).find(".codigo").text($("#idproduto").val());
+
+		$(linha).find(".produto").text($("#idproduto option:selected").text());
+
+		$(linha).find(".quantidadeproduto").val($("#txtquantidade").val());
+
+		//alterando a quantidade do produto 
+		$(linha).find(".quantidadeproduto").change(function () {
+			alterarProduto(linha);
 
 		});
+
+		$(linha).find(".btnexcluir").click(function () {
+			excluirProduto(linha);
+		})
+
+		$("#dadostabela").append(linha);
+
+
+		buscarProduto($("#idproduto").val(), linha);
+
+
 	}
 
-	function salvarCliente() {
 
-		var model = {
-			id: "null",
-			nome: "Felipe Mariano",
-			dataNascimento: "2000-01-01",
-			email: "testes34@teste.com",
-			telefone: "11996665432",
-			cpf: "99988877755",
-			rua: "teste4",
-			cidade: "teste56",
-			estado: "TS"
+	function calcularTotal() {
+		var total = 0;
+
+
+		var preco = $("#dadostabela .total").map(function () {
+			return parseFloat($(this).text());
+		}).get();
+
+
+		for (var i = 0; i < preco.length; i++) {
+			total += preco[i];
+		}
+
+		$("#totalgeral").text(total);
+	}
+
+	function excluirProduto(linha) {
+
+		$(linha).remove();
+		calcularTotal();
+	}
+
+	function alterarProduto(linha) {
+
+		console.log(linha)
+
+		var valorunitarios = $(linha).find(".valorunitario").text();
+		var qtde = $(linha).find(".quantidadeproduto").val();
+		$(linha).find(".total").text(valorunitarios * qtde);
+		calcularTotal();
+	}
+
+	function buscarProduto(id, linha) {
+
+		$.get("http://localhost:8080/produto/getProduto/" + id, function (resultado) {
+
+			var qtde = $(linha).find(".quantidadeproduto").val();
+
+			$(linha).find(".total").text(resultado.valor * qtde);
+			$(linha).find(".valorunitario").text(resultado.valor);
+			calcularTotal();
+
+		});
+
+	}
+
+	
+
+	/*
+				function salvarProduto() {
 			
-		};
-		$.ajax({
-			type: "POST",
-			url: "http://localhost:8080/venda/salvarCliente",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify(model),
-			dataType: "json",
-			success: function (jsonResult) {
-				console.log(jsonResult);
-			},
-			failure: function (response) {
-				alert("Erro ao carregar os dados: " + response);
-			}
-		});
-
-	}
+					var model = {
+						id: "null",
+						nome: "",
+						valor: "",
+						estoque: ".com",
+						categoria: "",
+						imagem: "",
+			
+						
+					};
+					$.ajax({
+						type: "POST",
+						url: "http://localhost:8080/venda/salvarProduto",
+						contentType: "application/json; charset=utf-8",
+						data: JSON.stringify(model),
+						dataType: "json",
+						success: function (jsonResult) {
+							console.log(jsonResult);
+						},
+						failure: function (response) {
+							alert("Erro ao carregar os dados: " + response);
+						}
+					});
+			
+				} */
 
 </script>
 </body>

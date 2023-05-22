@@ -12,14 +12,14 @@
 			<div class="container d-flex align-items-center">
 
 				<div class="logo me-auto">
-					<h1><a href="#">Projeto Estoque</a></h1>
+					<h1><a th:href="@{/}">Projeto Estoque</a></h1>
 				</div>
 
 
 
 				<nav id="navbar" class="navbar order-last order-lg-0">
 					<ul>
-						<li><a class="nav-link scrollto active" th:href="@{/principal}">Home</a></li>
+						<li><a class="nav-link scrollto active" th:href="@{/}">Home</a></li>
 
 						<li class="dropdown"><a href="#"><span>Listagem</span> <i class="bi bi-chevron-down"></i></a>
 							<ul>
@@ -39,6 +39,7 @@
 								<li><a class="nav-link scrollto" th:href="@{/produto/novo}">Produto</a></li>
 								<li><a class="nav-link scrollto" th:href="@{/cliente/novo}">Cliente</a></li>
 								<li><a class="nav-link scrollto" th:href="@{/fornecedor/novo}">Fornecedor</a></li>
+								<li><a class="nav-link scrollto" th:href="@{/venda/novo}">Venda</a></li>
 							</ul>
 						</li>
 
@@ -90,7 +91,7 @@
 						<div class="col-lg-2 col-md-6 footer-links">
 							<h4>Utilidade</h4>
 							<ul>
-								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/principal}">Home</a></li>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/}">Home</a></li>
 								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/categoria/listar}">Listar
 										Categoria</a></li>
 								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/produto/listar}">Listar
@@ -110,6 +111,7 @@
 								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/produto/novo}">Produto</a></li>
 								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/cliente/novo}">Cliente</a></li>
 								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/fornecedor/novo}">Fornecedor</a>
+								<li><i class="bx bx-chevron-right"></i> <a th:href="@{/venda/novo}">Venda</a>
 								</li>
 
 							</ul>

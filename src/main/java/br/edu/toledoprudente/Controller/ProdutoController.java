@@ -11,7 +11,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +52,13 @@ public class ProdutoController {
 	public String novo(ModelMap model) {
 		model.addAttribute("produto", new Produto());
 		return "/produto/index";
+	}
+	
+	@GetMapping(path = "/getProduto/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> getProduto(@PathVariable(value = "id") int id) {
+		
+		Produto obj = repository.findById(id);
+		return new ResponseEntity<Object>(obj, HttpStatus.OK);
 	}
 
 //-------------------------------------- metodo listar ------------------------------------------	
@@ -178,5 +187,9 @@ public class ProdutoController {
 		HttpEntity<byte[]> entity = new HttpEntity<byte[]>(arquivo, httpHeaders);
 		return entity;
 	}
+	
+	
+
+	
 
 }

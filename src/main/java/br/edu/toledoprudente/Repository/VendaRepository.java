@@ -7,4 +7,7 @@ import br.edu.toledoprudente.Entity.Venda;
 @Repository
 public class VendaRepository extends AbstractRepository<Venda, Integer> {
 
+	
+	
+	
 }
