@@ -138,4 +138,66 @@ public class ClienteController {
 		return "/cliente/index";
 	}
 	
+	
+	//-------------------------------------- metodo salvar ------------------------------------------	
+		@PostMapping("/cadastrar")
+		public String cadastrar(@ModelAttribute("cliente") Cliente cli, ModelMap model) {
+			try {
+				
+				
+				Validator validator;
+				ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+				validator = factory.getValidator();
+				Set<ConstraintViolation<Cliente>> constraintViolations =
+				validator.validate( cli );
+				String errors = "";
+
+				for (ConstraintViolation<Cliente> constraintViolation : constraintViolations) {
+					errors = errors + constraintViolation.getMessage() + ". "; }
+				
+				if(errors!="")
+				{
+				//tem erros
+				model.addAttribute("cliente",cli);
+				model.addAttribute("mensagem", errors);
+				model.addAttribute("retorno", false);
+				return "/cadastro";
+				}
+				else {
+					
+					Users usu = cli.getUsuario();
+					String senha = "{bcrypt}" + new BCryptPasswordEncoder().encode(usu.getPassword());
+					usu.setPassword(senha);
+					usu.setEnabled(true);
+					usu.setAdmin(false);
+					
+					Set<AppAuthority> appAuthorities = new HashSet<AppAuthority>();
+					AppAuthority app = new AppAuthority();
+					if (usu.isAdmin())
+						app.setAuthority("ADM");
+					else
+						app.setAuthority("USER");
+					app.setUsername(usu.getUsername());
+					appAuthorities.add(app);
+					usu.setAppAuthorities(appAuthorities);
+
+				}
+				
+				
+				if(cli.getId()== null)
+					repository.save(cli);
+				
+				else
+					repository.update(cli);
+				model.addAttribute("mensagem", "Cadastro realizado com sucesso");
+				model.addAttribute("retorno", true);
+				
+			} catch (Exception e) {
+				model.addAttribute("mensagem", "Erro ao Salvar" + e.getMessage());
+				model.addAttribute("retorno", false);
+			}
+			
+			return "/cadastro";
+		}
+	
 }

@@ -31,9 +31,11 @@ public class SecurityConfig {
 
 				.requestMatchers("/login").permitAll()
 				// .requestMatchers("/usuario/novo/**").hasRole("ADM")
+				.requestMatchers("/cadastro").permitAll()
+				.requestMatchers("/cliente/cadastrar").permitAll()
 				.anyRequest().authenticated()
 				
-		
+				
 				
 		).formLogin(
 				(form) -> form.loginPage("/login").defaultSuccessUrl("/", true).permitAll().failureUrl("/login-error"))
