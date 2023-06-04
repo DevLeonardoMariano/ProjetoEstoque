@@ -32,7 +32,7 @@ public class Produto extends AbstractEntity<Integer> {
 	@PositiveOrZero(message = "Valor deve ser maior que 0")
 	@Column(name="valor", nullable = false, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
-	private BigDecimal valor;
+	private double valor;
 	
 	@NotNull(message = "Informe quantidade")
 	@Column(name="estoque", length = 150, nullable = false)
@@ -110,11 +110,11 @@ public class Produto extends AbstractEntity<Integer> {
 			this.nome = nome;
 		}
 
-		public BigDecimal getValor() {
+		public double getValor() {
 			return valor;
 		}
 
-		public void setValor(BigDecimal valor) {
+		public void setValor(double valor) {
 			this.valor = valor;
 		}
 

@@ -35,9 +35,18 @@
 
 	<header th:include="fragmentos::header"></header>
 	<main class="container">
-		<form class="formulario" method="post" enctype="multipart/form-data" th:action="@{/produto/salvar}"
-			th:object="${produto}">
+		<form class="formulario" method="post" enctype="multipart/form-data" th:action="@{/venda/salvar}"
+			th:object="${venda}">
 			<h1>Venda</h1>
+			
+			<div class="form-group mb-2 col-md-8">
+				<label for="exampleInputPassword1">Funcionario</label>
+				<select class="form-control" id="idfuncionario">
+					<option value=""> Selecione um Funcionario...</option>
+					<option th:each="item:${listafuncionario}" th:value="${item.id}" th:text="${item.nome}">
+					</option>
+				</select>
+			</div>
 
 			<div class="form-group mb-2 col-md-8">
 				<label for="exampleInputPassword1">Cliente</label>
@@ -71,6 +80,7 @@
 		<table class="table table-striped" style="margin-bottom: 30px;">
 			<thead>
 				<tr>
+					<th scope="col">Funcionario</th>
 					<th scope="col">Cliente</th>
 					<th scope="col">Cod Produto</th>
 					<th scope="col">Produto</th>
@@ -86,6 +96,7 @@
 
 			<table style="display: none;">
 				<tr id="linhamodelo">
+					<td class="funcionario"></td>
 					<td class="cliente"></td>
 					<td class="codigo"></td>
 					<td class="produto"></td>
@@ -115,7 +126,7 @@
 		<h3>Total Geral</h3>
 		<span id="totalgeral"></span>
 		<div style="margin-top: 10px; margin-bottom: 10px;">
-			<button class="btn btn-info" id="salvarVenda">SALVAR</button>
+			<a class="btn btn-info" id="btnSalvarVenda">SALVAR</a>
 		</div>
 	</main>
 
@@ -142,7 +153,10 @@
 		$("#btnincluirproduto").click(function () {
 			incluirProduto();
 		});
-
+		
+		$("#btnSalvarVenda").click(function () {
+			salvarVenda();
+		});
 
 	});
 
@@ -152,7 +166,9 @@
 
 		var linha = $("#linhamodelo").clone();
 		linha.attr("id", "");
-
+		
+		$(linha).find(".funcionario").text($("#idfuncionario option:selected").text());
+		
 		$(linha).find(".cliente").text($("#idcliente option:selected").text());
 
 		$(linha).find(".codigo").text($("#idproduto").val());
@@ -225,37 +241,70 @@
 		});
 
 	}
+	
+	function salvarVenda(){
+		
+		   var totalVenda = 0;
+		   
+		   var funcionario = $ ("#idfuncionario").val();
+		
+            var cliente = $("#idcliente").val();
+
+            //validação clientes e produto
+
+            var venda = {
+                idcliente : parseInt(cliente),
+                idfuncionario : parseInt(funcionario),
+                data_venda: Date,
+                valor: parseFloat(totalVenda),
+                itens: []
+            };
+
+            //percorrendo as linhas da tabela
+
+            $("#dadostabela tr").each(function(index, elemento) {
+                var linha = $(elemento);
+
+                var produto = linha.find(".codigo").text();
+                var qtd = linha.find(".quantidadeproduto").val();
+                var valor_unitario = linha.find(".valorunitario").text();
+               
+
+
+                var item = {
+                    idproduto: parseInt(produto),
+                    quantidade: parseInt(qtd),
+                    valor_unitario: parseFloat(valor_unitario),
+                    valor_total: parseFloat(valor_unitario) * parseFloat(qtd)
+                };
+
+                totalVenda += parseFloat(valor_unitario) * parseFloat(qtd)
+                
+
+                //add produto lista venda
+                venda.itens.push(item)
+
+            });
+
+            console.log(JSON.stringify(venda));
+
+            $.ajax({
+                url: "/venda/salvar",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(venda),
+                success: function (response) {
+                    console.log("chegou aqui")
+                },
+                error: function(xhr, status, error) {
+                    console.log("erro")
+                }
+            })
+		
+	}
 
 	
-
-	/*
-				function salvarProduto() {
-			
-					var model = {
-						id: "null",
-						nome: "",
-						valor: "",
-						estoque: ".com",
-						categoria: "",
-						imagem: "",
-			
-						
-					};
-					$.ajax({
-						type: "POST",
-						url: "http://localhost:8080/venda/salvarProduto",
-						contentType: "application/json; charset=utf-8",
-						data: JSON.stringify(model),
-						dataType: "json",
-						success: function (jsonResult) {
-							console.log(jsonResult);
-						},
-						failure: function (response) {
-							alert("Erro ao carregar os dados: " + response);
-						}
-					});
-			
-				} */
+	
 
 </script>
 </body>

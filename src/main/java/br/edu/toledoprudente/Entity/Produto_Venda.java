@@ -1,6 +1,10 @@
 package br.edu.toledoprudente.Entity;
 
 import java.math.BigDecimal;
+
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -16,10 +20,23 @@ public class Produto_Venda extends AbstractEntity<Integer> {
 	private Integer quantidade;
 	
 	@Column(name="valorTotal", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
-	private BigDecimal valorTotal;
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
+	private double valorTotal;
+	
+	@Column(name="valorUnitario", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
+	
+	private double valorUnitario;
 	
 	//------------------------------------ RELACIONAMENTO -----------------------------------------	
 	
+	public double getValorUnitario() {
+		return valorUnitario;
+	}
+
+	public void setValorUnitario(double valorUnitario) {
+		this.valorUnitario = valorUnitario;
+	}
+
 	@ManyToOne
 	@JoinColumn(name ="idproduto")
 	private Produto produto;
@@ -58,11 +75,11 @@ public class Produto_Venda extends AbstractEntity<Integer> {
 		this.quantidade = quantidade;
 	}
 
-	public BigDecimal getValorTotal() {
+	public double getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(BigDecimal valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	

@@ -18,7 +18,7 @@ public class PrincipalController {
 	
 	@GetMapping("/")
 	public String principal(ModelMap model) {
-		model.addAttribute("nomeusuario", Repository.getUsuarioLogado().getNome());
+		//model.addAttribute("nomeusuario", Repository.getUsuarioLogado().getNome());
 		return "principal";
 	}
 	

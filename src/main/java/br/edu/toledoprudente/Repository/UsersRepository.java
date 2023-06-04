@@ -18,6 +18,7 @@ public class UsersRepository extends AbstractRepository<Users, Integer> implemen
 	@Autowired
 	private ClienteRepository ClienteRepository;
 	
+	
 	public Cliente getUsuarioLogado() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String nome;
@@ -37,6 +38,8 @@ public class UsersRepository extends AbstractRepository<Users, Integer> implemen
 		List<Cliente> lista = ClienteRepository.createQuery("select c from Users u inner join cliente c where u.username like ?1", username);
 		return lista.isEmpty() ? null : lista.get(0);
 	}
+	
+	
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -51,11 +51,27 @@ public class Users extends AbstractEntity<Integer> implements UserDetails {
 	public List<Cliente> getCliente() {
 		return cliente;
 	}
-
+	
+	
 
 	public void setCliente(List<Cliente> cliente) {
 		this.cliente = cliente;
 	}
+
+	@OneToMany(mappedBy = "usuario", cascade=CascadeType.PERSIST)
+	private List<Funcionario> funcionario;
+
+
+	public List<Funcionario> getFuncionario() {
+		return funcionario;
+	}
+
+
+
+	public void setFuncionario(List<Funcionario> funcionario) {
+		this.funcionario = funcionario;
+	}
+
 
 
 	public void setAdmin(boolean isAdmin) {

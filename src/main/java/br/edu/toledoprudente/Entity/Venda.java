@@ -1,7 +1,11 @@
 package br.edu.toledoprudente.Entity;
 
+
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,6 +20,18 @@ public class Venda extends AbstractEntity<Integer> {
 
 	@Column(name="dataVenda", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataVenda;
+	
+	@Column(name="valorTotal", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
+	private double valorTotal;
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 
 	public LocalDate getDataVenda() {
 		return dataVenda;
@@ -39,6 +55,17 @@ public class Venda extends AbstractEntity<Integer> {
 		this.cliente = cliente;
 	}
 	
+	@ManyToOne
+	@JoinColumn(name ="idfuncionario")
+	private Funcionario funcionario;
+	
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 	@OneToMany(mappedBy = "venda")
 	private List<Produto_Venda> produto_venda;
 
