@@ -44,8 +44,14 @@ public class UsersRepository extends AbstractRepository<Users, Integer> implemen
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Users user = findByUserName(username);
+	
+	 return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
+
+	}
+	/*public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Users user = findByUserName(username);
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				user.getAppAuthorities());
 	}
-
+	*/
 }

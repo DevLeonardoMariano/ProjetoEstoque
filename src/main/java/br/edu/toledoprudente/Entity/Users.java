@@ -1,6 +1,7 @@
 package br.edu.toledoprudente.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -137,8 +139,15 @@ public class Users extends AbstractEntity<Integer> implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		 List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+	        if(isAdmin)
+	        list.add(new SimpleGrantedAuthority("ADM"));
+	        else
+	        	list.add(new SimpleGrantedAuthority("USER"));
+
+	        return list;
+		
 	}
 
 	@Override

@@ -12,7 +12,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig{
+	
+
 
 	@Autowired
 	DataSource dataSource;
@@ -27,7 +29,30 @@ public class SecurityConfig {
 				.requestMatchers("/cadastro").permitAll()
 				.requestMatchers("/cliente/cadastrar").permitAll()
 				.requestMatchers("/principal").permitAll()
-				.requestMatchers("/funcionario/novo/*").hasRole("ADM")
+				.requestMatchers("/funcionario/novo/**").hasAuthority("ADM")
+				.requestMatchers("/funcionario/listar/**").hasAuthority("ADM")
+				.requestMatchers("/cliente/novo/**").hasAuthority("ADM")
+				.requestMatchers("/cliente/listar/**").hasAuthority("ADM")
+				.requestMatchers("/produto/novo/**").hasAuthority("ADM")
+				.requestMatchers("/produto/listar/**").hasAuthority("ADM")
+				.requestMatchers("/categoria/novo/**").hasAuthority("ADM")
+				.requestMatchers("/categoria/listar/**").hasAuthority("ADM")
+				.requestMatchers("/fornecedor/novo/**").hasAuthority("ADM")
+				.requestMatchers("/fornecedor/listar/**").hasAuthority("ADM")
+				
+				
+				
+				.requestMatchers("/funcionario/novo/**").hasRole("ADM")
+				.requestMatchers("/funcionario/listar/**").hasRole("ADM")
+				.requestMatchers("/cliente/novo/**").hasRole("ADM")
+				.requestMatchers("/cliente/listar/**").hasRole("ADM")
+				.requestMatchers("/produto/novo/**").hasRole("ADM")
+				.requestMatchers("/produto/listar/**").hasRole("ADM")
+				.requestMatchers("/categoria/novo/**").hasRole("ADM")
+				.requestMatchers("/categoria/listar/**").hasRole("ADM")
+				.requestMatchers("/fornecedor/novo/**").hasRole("ADM")
+				.requestMatchers("/fornecedor/listar/**").hasRole("ADM")
+				
 				.anyRequest().authenticated()
 				
 				
@@ -40,28 +65,8 @@ public class SecurityConfig {
 
 		return http.build();
 	}
+	
 
-	/* Cria usuário no banco de dados */
-	/*
-	 * @Bean UserDetailsManager users(DataSource dataSource) {
-	 * 
-	 * UserDetails user = User.builder() .username("anapaula@ana.com")
-	 * .password(passwordEncoder().encode("password")) .roles("ADM") .build();
-	 * 
-	 * JdbcUserDetailsManager users = new JdbcUserDetailsManager(this.dataSource);
-	 * users.createUser(user);
-	 * 
-	 * return users; }
-	 * 
-	 * 
-	 * //Carrega os usuários do banco /* @Bean public UserDetailsManager
-	 * users(DataSource dataSource) { JdbcUserDetailsManager users = new
-	 * JdbcUserDetailsManager(dataSource); return users; }
-	 * 
-	 * //Define o Encriptador padrão
-	 * 
-	 * @Bean public PasswordEncoder passwordEncoder() { return new
-	 * BCryptPasswordEncoder(16); }
-	 */
+	
 
 }

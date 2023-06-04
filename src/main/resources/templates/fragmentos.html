@@ -20,17 +20,21 @@
 				<nav id="navbar" class="navbar order-last order-lg-0">
 					<ul>
 						<li><a class="nav-link scrollto active" th:href="@{/}">Home</a></li>
-
-						<li class="dropdown"><a href="#"><span>Listagem</span> <i class="bi bi-chevron-down"></i></a>
-							<ul>
-								<li><a class="nav-link scrollto" th:href="@{/categoria/listar}">Listar Categoria</a>
-								</li>
-								<li><a class="nav-link scrollto" th:href="@{/produto/listar}">Listar Produto</a></li>
-								<li><a class="nav-link scrollto" th:href="@{/cliente/listar}">Listar Cliente</a></li>
-								<li><a class="nav-link scrollto" th:href="@{/fornecedor/listar}">Listar Fornecedor</a>
-								</li>
-							</ul>
-						</li>
+						
+							<li class="dropdown"><a href="#"><span>Listagem</span> <i class="bi bi-chevron-down"></i></a>
+								<ul>
+									<li><a class="nav-link scrollto" th:href="@{/categoria/listar}">Listar Categoria</a>
+									</li>
+									<li><a class="nav-link scrollto" th:href="@{/produto/listar}">Listar Produto</a></li>
+									<li><a class="nav-link scrollto" th:href="@{/cliente/listar}">Listar Cliente</a></li>
+									<li><a class="nav-link scrollto" th:href="@{/fornecedor/listar}">Listar Fornecedor</a>
+									<li><a class="nav-link scrollto" th:href="@{/venda/listar}">Listar Venda</a>
+									<li><a class="nav-link scrollto" th:href="@{/funcionario/listar}">Listar Funcionario</a>
+									</li>
+								</ul>
+							</li>
+						
+						
 
 
 						<li class="dropdown"><a href="#"><span>Cadastrar</span> <i class="bi bi-chevron-down"></i></a>
