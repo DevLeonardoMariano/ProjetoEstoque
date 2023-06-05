@@ -24,7 +24,7 @@ public class Produto_Venda extends AbstractEntity<Integer> {
 	private double valorTotal;
 	
 	@Column(name="valorUnitario", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
-	
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	private double valorUnitario;
 	
 	//------------------------------------ RELACIONAMENTO -----------------------------------------	

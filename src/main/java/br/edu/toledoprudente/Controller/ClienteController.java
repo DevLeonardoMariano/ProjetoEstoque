@@ -18,6 +18,7 @@ import br.edu.toledoprudente.Entity.AppAuthority;
 import br.edu.toledoprudente.Entity.Cliente;
 import br.edu.toledoprudente.Entity.Users;
 import br.edu.toledoprudente.Repository.ClienteRepository;
+import br.edu.toledoprudente.Repository.UsersRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -30,6 +31,9 @@ public class ClienteController {
 	
 	@Autowired
 	private ClienteRepository repository;
+	
+	@Autowired
+	private UsersRepository repositoryusers;
 	
 	//tag novo utilizado na URL
 	@GetMapping("/novo")
@@ -102,7 +106,16 @@ public class ClienteController {
 			return "/cliente/index";
 			}
 			else {
-				
+				   String username = cli.getUsuario().getUsername();
+		            Users existingUser = repositoryusers.findByUserName(username);
+
+		            if (existingUser != null) {
+		                model.addAttribute("cliente", cli);
+		                model.addAttribute("mensagem", "Já existe um usuário com esse nome");
+		                model.addAttribute("retorno", false);
+		                return "/cliente/index";
+		            }
+		            
 				Users usu = cli.getUsuario();
 				String senha = "{bcrypt}" + new BCryptPasswordEncoder().encode(usu.getPassword());
 				usu.setPassword(senha);

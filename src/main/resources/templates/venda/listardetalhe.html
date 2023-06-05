@@ -28,7 +28,7 @@
 	<!-- Template Main CSS File -->
 	<link href="" rel="stylesheet" th:href="@{/css/style.css}">
 
-	<title>Listar Vendas</title>
+	<title>Listar Detalhe Vendas</title>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
 	<header th:include="fragmentos::header"></header>
 
 	<main class="container" style="margin: 100px;">
-		<h1>LISTAR VENDA</h1>
+		<h1>LISTAR DETALHES VENDAS</h1>
 
 		<div style="margin-top: 20px; margin-left: auto; margin-bottom: 30px;">
 			<a class="btn btn-info" th:href="@{/venda/novo}">INCLUIR</a>
@@ -46,23 +46,23 @@
 			<thead>
 				<tr>
 					<th scope="col">Código</th>
-					<th scope="col">Data</th>
-					<th scope="col">Cliente</th>
-					<th scope="col">Funcionario</th>
+					<th scope="col">Produto</th>
+					<th scope="col">Quantidade</th>
+					<th scope="col">Valor Unitario</th>
 					<th scope="col">Valor Total</th>
-					
+					<th scope="col">Cod Venda</th>
 
 
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="item:${lista}">
+				<tr th:each="item:${listadetalhe}">
 					<th scope="row" th:text="${item.id}"></th>
-					<td th:text="${#temporals.format(item.dataVenda, 'dd/MM/yyyy')}"></td>
-					<td th:text="${item.cliente.nome}"></td>
-					<td th:text="${{item.funcionario.nome}}"></td>
-					<td th:text="|R$ ${{item.valorTotal}}"></td>
-					
+					<td th:text="${item.produto.nome}"></td>
+					<td th:text="${item.quantidade}"></td>
+					<td th:text="|R$ ${{item.valorUnitario}}"></td>
+					<td th:text="|R$ ${item.valorTotal}"></td>
+					<td th:text="${item.venda.id}"></td>
 					
 				</tr>
 			</tbody>

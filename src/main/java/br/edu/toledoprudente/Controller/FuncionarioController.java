@@ -17,6 +17,7 @@ import br.edu.toledoprudente.Entity.AppAuthority;
 import br.edu.toledoprudente.Entity.Funcionario;
 import br.edu.toledoprudente.Entity.Users;
 import br.edu.toledoprudente.Repository.FuncionarioRepository;
+import br.edu.toledoprudente.Repository.UsersRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -28,6 +29,9 @@ public class FuncionarioController {
 
 	@Autowired
 	private FuncionarioRepository repository;
+	
+	@Autowired
+	private UsersRepository repositoryusers;
 	
 	@GetMapping("/novo")
 	public String novo(ModelMap model) {
@@ -98,6 +102,16 @@ public class FuncionarioController {
 				return "/funcionario/index";
 				}
 				else {
+					
+					String username = fun.getUsuario().getUsername();
+		            Users existingUser = repositoryusers.findByUserName(username);
+
+		            if (existingUser != null) {
+		                model.addAttribute("cliente", fun);
+		                model.addAttribute("mensagem", "Já existe um usuário com esse nome");
+		                model.addAttribute("retorno", false);
+		                return "/funcionario/index";
+		            }
 					
 					Users usu = fun.getUsuario();
 					String senha = "{bcrypt}" + new BCryptPasswordEncoder().encode(usu.getPassword());

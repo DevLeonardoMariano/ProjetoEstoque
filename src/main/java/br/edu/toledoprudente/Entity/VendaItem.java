@@ -2,11 +2,15 @@ package br.edu.toledoprudente.Entity;
 
 import java.util.List;
 
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 public class VendaItem {
 	
 	
     public int idcliente;
     public int idfuncionario;
+    @NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
     public int valor;
     public List<ProdutoVendaItem> itens;
     

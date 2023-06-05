@@ -40,6 +40,8 @@ public class SecurityConfig{
 				.requestMatchers("/categoria/listar/**").hasAuthority("ADM")
 				.requestMatchers("/fornecedor/novo/**").hasAuthority("ADM")
 				.requestMatchers("/fornecedor/listar/**").hasAuthority("ADM")
+				.requestMatchers("/venda/novo/**").hasAuthority("ADM")
+				.requestMatchers("/venda/listardetalhe/**").hasAuthority("ADM")
 				
 				
 				
@@ -55,6 +57,8 @@ public class SecurityConfig{
 				.requestMatchers("/categoria/listar/**").hasRole("ADM")
 				.requestMatchers("/fornecedor/novo/**").hasRole("ADM")
 				.requestMatchers("/fornecedor/listar/**").hasRole("ADM")
+				.requestMatchers("/venda/novo/**").hasRole("ADM")
+				.requestMatchers("/venda/listardetalhe/**").hasRole("ADM")
 				
 				.anyRequest().authenticated()
 				

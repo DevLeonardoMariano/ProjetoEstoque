@@ -1,7 +1,10 @@
 package br.edu.toledoprudente.Controller;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.edu.toledoprudente.Entity.Cliente;
 import br.edu.toledoprudente.Entity.Funcionario;
@@ -49,7 +53,6 @@ public class VendaController {
 	@Autowired
 	Produto_VendaRepository repositoryprodutovenda;
 
-	private VendaController estoqueService;
 
 	@GetMapping(path = "/novo")
 	public String index() {
@@ -63,27 +66,41 @@ public class VendaController {
 		return new ResponseEntity<Object>(lista, HttpStatus.OK);
 	}
 
-	/* metodo usado para retornar dados para selection */
+	
 	@ModelAttribute(name = "listaproduto")
 	public List<Produto> listaProduto() {
 
 		return repositoryproduto.findAll();
 	}
 
-	/* metodo usado para retornar dados para selection */
+	
 	@ModelAttribute(name = "listacliente")
 	public List<Cliente> listaCliente() {
 
 		return repositorycliente.findAll();
 	}
 
-	/* metodo usado para retornar dados para selection */
+	
 	@ModelAttribute(name = "listafuncionario")
 	public List<Funcionario> listaFuncionario() {
 
 		return repositoryfuncionario.findAll();
 	}
+	
+	@GetMapping("/listardetalhe")
+    public String listadetalhe(ModelMap model) {
+        model.addAttribute("listadetalhe", repositoryprodutovenda.findAll());
+        return "/venda/listardetalhe";
+    }
+	
+	@GetMapping("/listar")
+    public String listar(ModelMap model) {
+        model.addAttribute("lista", repositoryvenda.findAll());
+        return "/venda/listar";
+    }
 
+	
+	
 	@PostMapping(path = "/salvarProduto", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> salvar(@RequestBody Produto produto) {
 		try {
@@ -98,8 +115,9 @@ public class VendaController {
 		return new ResponseEntity<Object>(produto, HttpStatus.OK);
 	}
 
+	
+	
 	@PostMapping(path = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	/* public salvar(@RequestBody Venda ven, ModelMap model) { */
 	public ResponseEntity<Object> salvar(@RequestBody VendaItem vendaItem) {
 		try {
 			Venda venda = new Venda();
@@ -123,6 +141,7 @@ public class VendaController {
 			venda.setValorTotal(valor_total);
 
 			repositoryvenda.save(venda);
+			
 
 			int id_venda = venda.getId();
 
@@ -148,12 +167,16 @@ public class VendaController {
 			}
 
 		} catch (Exception e) {
+			
 			return new ResponseEntity<Object>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			
 		}
 
 		return new ResponseEntity<Object>(vendaItem, HttpStatus.OK);
 
 	}
+	
+	
 
 	
 

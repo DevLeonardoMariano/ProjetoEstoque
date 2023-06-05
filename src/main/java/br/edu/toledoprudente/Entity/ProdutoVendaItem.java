@@ -1,11 +1,16 @@
 package br.edu.toledoprudente.Entity;
 
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 public class ProdutoVendaItem {
 
 	
     public int idproduto;
     public int quantidade;
+    @NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
     public double valor_unitario;
+    @NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
     public double valor_total;
     
 	public int getIdproduto() {

@@ -4,7 +4,9 @@ package br.edu.toledoprudente.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import jakarta.persistence.Column;
@@ -18,6 +20,7 @@ import jakarta.persistence.Table;
 @Table(name = "venda")
 public class Venda extends AbstractEntity<Integer> {
 
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name="dataVenda", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataVenda;
 	
