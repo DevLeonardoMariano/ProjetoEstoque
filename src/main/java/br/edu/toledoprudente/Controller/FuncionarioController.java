@@ -106,7 +106,7 @@ public class FuncionarioController {
 					String username = fun.getUsuario().getUsername();
 		            Users existingUser = repositoryusers.findByUserName(username);
 
-		            if (existingUser != null) {
+		            if (existingUser != null && !existingUser.getUsername().equals(username)) {
 		                model.addAttribute("cliente", fun);
 		                model.addAttribute("mensagem", "Já existe um usuário com esse nome");
 		                model.addAttribute("retorno", false);
