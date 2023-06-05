@@ -29,6 +29,7 @@ public class SecurityConfig{
 				.requestMatchers("/cadastro").permitAll()
 				.requestMatchers("/cliente/cadastrar").permitAll()
 				.requestMatchers("/principal").permitAll()
+				
 				.requestMatchers("/funcionario/novo/**").hasAuthority("ADM")
 				.requestMatchers("/funcionario/listar/**").hasAuthority("ADM")
 				.requestMatchers("/cliente/novo/**").hasAuthority("ADM")
@@ -39,6 +40,8 @@ public class SecurityConfig{
 				.requestMatchers("/categoria/listar/**").hasAuthority("ADM")
 				.requestMatchers("/fornecedor/novo/**").hasAuthority("ADM")
 				.requestMatchers("/fornecedor/listar/**").hasAuthority("ADM")
+				
+				
 				
 				
 				

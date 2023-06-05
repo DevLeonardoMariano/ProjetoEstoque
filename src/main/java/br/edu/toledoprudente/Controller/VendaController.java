@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.edu.toledoprudente.Entity.Cliente;
 import br.edu.toledoprudente.Entity.Funcionario;
@@ -33,54 +34,49 @@ import br.edu.toledoprudente.Repository.VendaRepository;
 @RequestMapping("/venda")
 public class VendaController {
 
-
-	
 	@Autowired
 	ProdutoRepository repositoryproduto;
-	
+
 	@Autowired
 	ClienteRepository repositorycliente;
-	
+
 	@Autowired
 	FuncionarioRepository repositoryfuncionario;
-	
+
 	@Autowired
 	VendaRepository repositoryvenda;
-	
+
 	@Autowired
 	Produto_VendaRepository repositoryprodutovenda;
 
-	
+	private VendaController estoqueService;
+
 	@GetMapping(path = "/novo")
 	public String index() {
-		
+
 		return "/venda/index";
 	}
-	
-	
+
 	@GetMapping(path = "/getProduto/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getProduto(@PathVariable(value = "nome") String nome) {
 		List<Produto> lista = repositoryproduto.findByName(nome);
 		return new ResponseEntity<Object>(lista, HttpStatus.OK);
 	}
 
-
-	
-	
 	/* metodo usado para retornar dados para selection */
 	@ModelAttribute(name = "listaproduto")
 	public List<Produto> listaProduto() {
 
 		return repositoryproduto.findAll();
 	}
-	
+
 	/* metodo usado para retornar dados para selection */
 	@ModelAttribute(name = "listacliente")
 	public List<Cliente> listaCliente() {
 
 		return repositorycliente.findAll();
 	}
-	
+
 	/* metodo usado para retornar dados para selection */
 	@ModelAttribute(name = "listafuncionario")
 	public List<Funcionario> listaFuncionario() {
@@ -91,7 +87,7 @@ public class VendaController {
 	@PostMapping(path = "/salvarProduto", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> salvar(@RequestBody Produto produto) {
 		try {
-			
+
 			if (produto.getId() == null)
 				repositoryproduto.save(produto);
 			else
@@ -101,71 +97,64 @@ public class VendaController {
 		}
 		return new ResponseEntity<Object>(produto, HttpStatus.OK);
 	}
-	
-	
-	@PostMapping(path = "/salvar", produces=MediaType.APPLICATION_JSON_VALUE, consumes =
-			MediaType.APPLICATION_JSON_VALUE)
-			/*public salvar(@RequestBody Venda ven, ModelMap model) {*/
-			public ResponseEntity<Object> salvar(@RequestBody VendaItem vendaItem) {
-				try {
-					Venda venda = new Venda();
-					
-					Cliente cliente = repositorycliente.findById(vendaItem.getIdcliente());
-					venda.setCliente(cliente);
-					
-					venda.setDataVenda(LocalDate.now());
-					
-					Funcionario funcionario = repositoryfuncionario.findById(vendaItem.getIdfuncionaario());
-					venda.setFuncionario(funcionario);
-					
-					List<ProdutoVendaItem> itemsVenda = vendaItem.getItens();
-					
-					double valor_total = 0;
-					
-					for (ProdutoVendaItem itemVenda : itemsVenda) {
-						valor_total += itemVenda.getValor_unitario() * itemVenda.quantidade;
-					}
-					
-					venda.setValorTotal(valor_total);
-					
-					repositoryvenda.save(venda);
-					
-					int id_venda = venda.getId();
-					
-					for (ProdutoVendaItem itemVenda : itemsVenda) {
-						Produto_Venda itemproduto = new Produto_Venda();
-						
-						Produto produtoVenda = repositoryproduto.findById(itemVenda.getIdproduto());
-						itemproduto.setProduto(produtoVenda);
-						
-						itemproduto.setQuantidade(itemVenda.getQuantidade());
-						
-						itemproduto.setValorTotal(itemVenda.getValor_total());
-						
-						itemproduto.setValorUnitario(itemVenda.getValor_unitario());
-						
-						
-						
-						itemproduto.setVenda(venda);
-						
-						repositoryprodutovenda.save(itemproduto);
-						
-						produtoVenda.setEstoque(produtoVenda.getEstoque() - itemVenda.quantidade);
-						
-						repositoryproduto.save(produtoVenda);
-					}
-						
-					
-					
-					
-				} catch (Exception e) {
-					return new ResponseEntity<Object>( null, HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-				
-				return new ResponseEntity<Object>( vendaItem, HttpStatus.OK);
 
+	@PostMapping(path = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	/* public salvar(@RequestBody Venda ven, ModelMap model) { */
+	public ResponseEntity<Object> salvar(@RequestBody VendaItem vendaItem) {
+		try {
+			Venda venda = new Venda();
+
+			Cliente cliente = repositorycliente.findById(vendaItem.getIdcliente());
+			venda.setCliente(cliente);
+
+			venda.setDataVenda(LocalDate.now());
+
+			Funcionario funcionario = repositoryfuncionario.findById(vendaItem.getIdfuncionaario());
+			venda.setFuncionario(funcionario);
+
+			List<ProdutoVendaItem> itemsVenda = vendaItem.getItens();
+
+			double valor_total = 0;
+
+			for (ProdutoVendaItem itemVenda : itemsVenda) {
+				valor_total += itemVenda.getValor_unitario() * itemVenda.quantidade;
 			}
-	
+
+			venda.setValorTotal(valor_total);
+
+			repositoryvenda.save(venda);
+
+			int id_venda = venda.getId();
+
+			for (ProdutoVendaItem itemVenda : itemsVenda) {
+				Produto_Venda itemproduto = new Produto_Venda();
+
+				Produto produtoVenda = repositoryproduto.findById(itemVenda.getIdproduto());
+				itemproduto.setProduto(produtoVenda);
+
+				itemproduto.setQuantidade(itemVenda.getQuantidade());
+
+				itemproduto.setValorTotal(itemVenda.getValor_total());
+
+				itemproduto.setValorUnitario(itemVenda.getValor_unitario());
+
+				itemproduto.setVenda(venda);
+
+				repositoryprodutovenda.save(itemproduto);
+
+				produtoVenda.setEstoque(produtoVenda.getEstoque() - itemVenda.quantidade);
+
+				repositoryproduto.save(produtoVenda);
+			}
+
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return new ResponseEntity<Object>(vendaItem, HttpStatus.OK);
+
+	}
+
 	
 
 }

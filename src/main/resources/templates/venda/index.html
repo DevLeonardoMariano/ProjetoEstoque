@@ -259,6 +259,8 @@
                 valor: parseFloat(totalVenda),
                 itens: []
             };
+            
+            var validacaoEstoqueConcluida = true;
 
             //percorrendo as linhas da tabela
 
@@ -294,7 +296,7 @@
                 contentType: "application/json",
                 data: JSON.stringify(venda),
                 success: function (response) {
-                    console.log("chegou aqui")
+                    console.log("Venda Realiza")
                 },
                 error: function(xhr, status, error) {
                     console.log("erro")
